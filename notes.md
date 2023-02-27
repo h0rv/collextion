@@ -25,6 +25,9 @@
 
   - NLP:
     - <https://github.com/explosion/spaCy> (Python)
+  - Static site generators:
+    - <https://www.11ty.dev/>
+    - <https://gohugo.io/>
 
 ## Features
 
