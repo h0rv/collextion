@@ -18,6 +18,7 @@
   - Podcast:
     - YouTube: https://youtube.com/playlist?list=PLrAXtmErZgOdP_8GztsuKi9nrraNbKKp4
     - RSS feed for new posts: https://lexfridman.com/podcast/ 
+    - Already transcribed podcasts (using Whisper): https://karpathy.ai/lexicap/
   - Books:
     - https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks
 
