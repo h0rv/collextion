@@ -1,0 +1,15 @@
+[
+    {
+        "label": "About",
+        "url": "/about"
+    },
+    {
+        "label": "Genres",
+        "url": "/tags"
+    },
+    {
+        "label": "GitHub",
+        "url": "https://github.com/h0rv/collextion",
+        "newTab": true
+    }
+]

@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: 
+Sitemap: https://colLextion.com/sitemap.xml
