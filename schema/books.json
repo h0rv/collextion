@@ -1,0 +1,12 @@
+{
+	"id": "ID of podcast (podcast number)",
+	"reccomendations": [
+		{
+			"book_title": "Title of book",
+			"author": "Author of book",
+			"isbn": "ISBN number",
+			"url": "Link to more information about book",
+			"cover_url": "Link to cover of book"
+		}
+	]
+}
