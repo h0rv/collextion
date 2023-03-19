@@ -1,6 +1,6 @@
 {
 	"title": "Title of podcast",
-	"id": "ID of podcast (podcast number)",
+	"id": "ID of podcast (same as podcast number)",
 	"guest": "Podcast guest",
 	"date": "Date podcast was released",
 	"url": "Link to podcast",

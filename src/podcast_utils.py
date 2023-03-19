@@ -8,6 +8,32 @@ schema_path = '../schema'
 podcast_schema_path = schema_path + '/podcast.json'
 
 
+def get_podcast_schema():
+    """
+    Load the podcast JSON schema into an object
+    """
+    with open(podcast_schema_path, 'r') as read_file:
+        schema = json.load(read_file)
+    return schema
+
+
+def get_rss_feed():
+    """
+    Get RSS feed for the podcast
+    """
+    feed = feedparser.parse(feed_url)
+    return feed
+
+
+def get_podcast_entries():
+    """
+    Get podcast entries from RSS feed
+    """
+    feed = get_rss_feed()
+    podcast_entries = feed['entries']
+    return podcast_entries
+
+
 def get_title(entry):
     """
     Get title of podcast
@@ -36,50 +62,53 @@ def get_guest_name(entry):
     name = link.replace(url, '')
     name = name.replace('-', ' ')
     # Get rid of non-alphabetic characters besides ' '
-    name = ''.join([c for c in name if c.isalpha() or c == ' '])
+    name = ''.join([c for c in name if c.isalpha() or c == ' ']).strip()
     # Capitalize name
-    name = name.title()
+    name = name.strip()
     return name
+
+
+def get_date(entry):
+    """
+    Get date of publication
+    """
+    parsed_date = entry['published_parsed']
+    year = str(parsed_date[0])
+    month = str(parsed_date[1])
+    day = str(parsed_date[2])
+    return month + '/' + day + '/' + year
+
+
+def get_url(entry):
+    """
+    Get link to podcast
+    """
+    url = entry['link']
+    return url
+
+
+def get_description(entry):
+    """
+    Get description of podcast
+    """
+    description = entry['summary']
+    return description
 
 
 def extract_podcast_info(entry):
     """
     Extract information into JSON from a podcast RSS entry
     """
-    json = get_podcast_schema()
+    info = get_podcast_schema()
 
-    json['title'] = get_title(entry)
-    json['id'] = get_podcast_number(entry)
-    json['guest'] = get_guest_name(entry)
+    info['title'] = get_title(entry)
+    info['id'] = get_podcast_number(entry)
+    info['guest'] = get_guest_name(entry)
+    info['date'] = get_date(entry)
+    info['url'] = get_url(entry)
+    info['description'] = get_description(entry)
 
-    print(json['id'])
-    return NotImplemented
-
-
-def get_podcast_schema():
-    """
-    Load the podcast JSON schema into an object
-    """
-    with open(podcast_schema_path, 'r') as read_file:
-        schema = json.load(read_file)
-    return schema
-
-
-def get_podcast_entries():
-    """
-    Get podcast entries from RSS feed
-    """
-    feed = get_rss_feed()
-    podcast_entries = feed['entries']
-    return podcast_entries
-
-
-def get_rss_feed():
-    """
-    Get RSS feed for the podcast
-    """
-    feed = feedparser.parse(feed_url)
-    return feed
+    return info
 
 
 if __name__ == "__main__":

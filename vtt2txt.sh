@@ -11,6 +11,6 @@ fi
 cat $input				\
 	| grep : -v			\
 	| awk '!seen[$0]++' \
-	| tail -n +3		\ # start at line 3 to exclude header
+	| tail -n +3		\
 	> $output
 

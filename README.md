@@ -7,7 +7,9 @@ Final project for CS 1699 Practical AI, Spring 2023.
 ## Download Pre-transcribed Transcripts
 
   ```bash
-    ./download-transcripts.sh
+    ./download_transcripts.sh
+    # Conver data to text format (removing timing informatio from *.vtt file)
+    ./convert_all.sh
   ```
 
 ## Running the site
