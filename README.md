@@ -4,17 +4,23 @@ A website to display book recommendations from the [Lex Fridman Podcast](https:/
 
 Final project for CS 1699 Practical AI, Spring 2023.
 
+## Install dependencies
+
+  ```bash
+  pip install -r requirements.txt
+  ```
+
 ## Download Pre-transcribed Transcripts
 
   ```bash
-    ./download_transcripts.sh
-    # Conver data to text format (removing timing informatio from *.vtt file)
-    ./convert_all.sh
+  ./download_transcripts.sh
+  # Conver data to text format (removing timing informatio from *.vtt file)
+  ./convert_all.sh
   ```
 
 ## Running the site
 
   ```bash
-    npm install --prefix site/
-    npm start   --prefix site/
+  npm install --prefix site/
+  npm start   --prefix site/
   ``` 
