@@ -6,6 +6,7 @@ url = 'https://lexfridman.com'
 feed_url = 'https://lexfridman.com/feed/podcast/'
 schema_path = '../schema'
 podcast_schema_path = schema_path + '/podcast.json'
+output_file_path = "podcasts.json"
 
 
 def get_podcast_schema():
@@ -44,10 +45,18 @@ def get_title(entry):
 
 def get_podcast_number(entry):
     """
-    TODO - implement for older episodes that do are not numbered
+    Get number of the podcast
     """
     title = get_title(entry)
-    start = title.index('#') + 1  # skip over '#'
+
+    try:
+        start = title.index('#') + 1  # skip over '#'
+    except ValueError:
+        """
+        TODO - implement for older episodes that do are not numbered
+        """
+        return -1
+
     end = title.index(' ', start)
     num = title[start:end]
     return num
@@ -113,4 +122,13 @@ def extract_podcast_info(entry):
 
 if __name__ == "__main__":
     entries = get_podcast_entries()
-    extract_podcast_info(entries[0])
+
+    info_map = dict()
+    for entry in entries:
+        info = extract_podcast_info(entry)
+        id = info['id']
+        info_map[id] = info
+
+    with open(output_file_path, 'w') as f:
+        json.dump(info_map, f)
+
