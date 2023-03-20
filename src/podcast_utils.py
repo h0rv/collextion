@@ -124,5 +124,5 @@ if __name__ == "__main__":
         id = info['id']
         info_map[id] = info
 
-    with open(consts.podcast_output_file_path, 'w') as f:
+    with open(consts.podcasts_output_file_path, 'w') as f:
         json.dump(info_map, f)

@@ -1,4 +1,3 @@
-from collections.abc import Generator
 import consts
 from podcast_utils import *
 
@@ -6,9 +5,10 @@ from os import listdir
 import spacy
 from spacy.language import Language
 from spacy.tokens import Doc
+from typing import Generator
 
 
-def get_book_schema() -> object:
+def get_book_schema() -> dict:
     """
     Load the book JSON schema into an object
     """
@@ -34,13 +34,11 @@ def get_transcript_name(num: int) -> str:
     return name
 
 
-def get_transcript_num(name: str) -> int:
+def get_transcript_num(fname: str) -> int:
     """
     Get transcript number from name
     """
-    l = len(consts.transcript_name_prefix)
-    r = len(consts.transcript_name_suffix)
-    num = name[l:r]
+    num = ''.join([c for c in fname if c.isdigit()])
     return int(num)
 
 
@@ -70,17 +68,29 @@ def tokenize_transcript(nlp: Language, transcript: str) -> Doc:
     return doc
 
 
-def get_book_recommendations(transcript: str):
+def get_book_recommendations(fname: str):
     """
     Get book recommendations from podcast transcript
     """
-    return NotImplemented
+    book = get_book_schema()
+
+    book['id'] = get_transcript_num(fname)
+    book['reccomendations'] = []
+
+    return book
 
 
 if __name__ == "__main__":
-    book = get_book_schema()
     files = get_transcript_files_gen()
 
+    book_map = dict()
     for f in files:
-        print(f)
+        book = get_book_recommendations(f)
+        id = book['id']
+        book_map[id] = book
+
+    book_map = dict(sorted(book_map.items(), reverse=True))
+
+    with open(consts.books_output_file_path, 'w') as f:
+        json.dump(book_map, f)
 
