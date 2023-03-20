@@ -1,15 +1,15 @@
 # Links
-url = 'https://lexfridman.com'
-feed_url = 'https://lexfridman.com/feed/podcast/'
+URL = 'https://lexfridman.com'
+FEED_URL = 'https://lexfridman.com/feed/podcast/'
 
 # Schema
-schema_path = '../schema'
-podcast_schema_path = schema_path + '/podcast.json'
-book_schema_path = schema_path + '/book.json'
+SCHEMA_PATH = '../schema'
+PODCAST_SCHEMA_PATH = SCHEMA_PATH + '/podcast.json'
+BOOK_SCHEMA_PATH = SCHEMA_PATH + '/book.json'
 
 # File paths
-podcasts_output_file_path = "podcasts.json"
-books_output_file_path = "books.json"
-transcripts_path = "../data/lexicap"
-transcript_name_prefix = "episode_"
-transcript_name_suffix = ".txt"
+PODCASTS_OUTPUT_PATH = "podcasts.json"
+BOOKS_OUTPUT_PATH = "books.json"
+TRANSCRIPTS_DIR_PATH = "../data/lexicap"
+TRANSCRIPT_NAME_PREFIX = "episode_"
+TRANSCRIPT_NAME_SUFFIX = ".txt"

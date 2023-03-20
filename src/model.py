@@ -1,4 +1,4 @@
-import consts
+from consts import *
 from podcast_utils import *
 
 from os import listdir
@@ -12,7 +12,7 @@ def get_book_schema() -> dict:
     """
     Load the book JSON schema into an object
     """
-    with open(consts.book_schema_path, 'r') as read_file:
+    with open(BOOK_SCHEMA_PATH, 'r') as read_file:
         schema = json.load(read_file)
     return schema
 
@@ -21,7 +21,7 @@ def get_transcript_path(transcript_name: str) -> str:
     """
     Get full path to transcript
     """
-    path = consts.transcripts_path + "/" + transcript_name
+    path = TRANSCRIPTS_DIR_PATH + "/" + transcript_name
     return path
 
 
@@ -29,8 +29,8 @@ def get_transcript_name(num: int) -> str:
     """
     Get transcript file name by number/ID
     """
-    name = consts.transcript_name_prefix + \
-        str(num) + consts.transcript_name_suffix
+    name = TRANSCRIPT_NAME_PREFIX + \
+        str(num) + TRANSCRIPT_NAME_SUFFIX
     return name
 
 
@@ -46,7 +46,7 @@ def get_transcript_files_gen() -> Generator:
     """
     Return generator for all transcripts full paths
     """
-    path = consts.transcripts_path + '/'
+    path = TRANSCRIPTS_DIR_PATH + '/'
     files = listdir(path)
     file_paths_gen = (path + f for f in files)
     return file_paths_gen
@@ -91,6 +91,6 @@ if __name__ == "__main__":
 
     book_map = dict(sorted(book_map.items(), reverse=True))
 
-    with open(consts.books_output_file_path, 'w') as f:
+    with open(BOOKS_OUTPUT_PATH, 'w') as f:
         json.dump(book_map, f)
 

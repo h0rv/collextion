@@ -1,4 +1,4 @@
-import consts
+from consts import *
 
 import json
 import feedparser
@@ -8,7 +8,7 @@ def get_podcast_schema() -> dict:
     """
     Load the podcast JSON schema into an object
     """
-    with open(consts.podcast_schema_path, 'r') as read_file:
+    with open(PODCAST_SCHEMA_PATH, 'r') as read_file:
         schema = json.load(read_file)
     return schema
 
@@ -17,7 +17,7 @@ def get_rss_feed():
     """
     Get RSS feed for the podcast
     """
-    feed = feedparser.parse(consts.feed_url)
+    feed = feedparser.parse(FEED_URL)
     return feed
 
 
@@ -63,7 +63,7 @@ def get_guest_name(entry: dict) -> str:
         Example: `https://lexfridman.com/max-tegmark/`
     """
     link = entry['link']
-    name = link.replace(consts.url, '')
+    name = link.replace(URL, '')
     name = name.replace('-', ' ')
     # Get rid of non-alphabetic characters besides ' '
     name = ''.join([c for c in name if c.isalpha() or c == ' ']).strip()
@@ -124,5 +124,5 @@ if __name__ == "__main__":
         id = info['id']
         info_map[id] = info
 
-    with open(consts.podcasts_output_file_path, 'w') as f:
+    with open(PODCASTS_OUTPUT_PATH, 'w') as f:
         json.dump(info_map, f)
