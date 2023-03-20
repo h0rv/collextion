@@ -1,7 +1,8 @@
+from collections.abc import Generator
 import consts
-
 from podcast_utils import *
 
+from os import listdir
 import spacy
 from spacy.language import Language
 from spacy.tokens import Doc
@@ -33,6 +34,26 @@ def get_transcript_name(num: int) -> str:
     return name
 
 
+def get_transcript_num(name: str) -> int:
+    """
+    Get transcript number from name
+    """
+    l = len(consts.transcript_name_prefix)
+    r = len(consts.transcript_name_suffix)
+    num = name[l:r]
+    return int(num)
+
+
+def get_transcript_files_gen() -> Generator:
+    """
+    Return generator for all transcripts full paths
+    """
+    path = consts.transcripts_path + '/'
+    files = listdir(path)
+    file_paths_gen = (path + f for f in files)
+    return file_paths_gen
+
+
 def init_spacy() -> Language:
     """
     Initaliaze spacy
@@ -58,4 +79,8 @@ def get_book_recommendations(transcript: str):
 
 if __name__ == "__main__":
     book = get_book_schema()
+    files = get_transcript_files_gen()
+
+    for f in files:
+        print(f)
 
