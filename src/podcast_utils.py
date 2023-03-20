@@ -1,19 +1,14 @@
+import consts
+
 import json
 import feedparser
 
 
-url = 'https://lexfridman.com'
-feed_url = 'https://lexfridman.com/feed/podcast/'
-schema_path = '../schema'
-podcast_schema_path = schema_path + '/podcast.json'
-output_file_path = "podcasts.json"
-
-
-def get_podcast_schema():
+def get_podcast_schema() -> dict:
     """
     Load the podcast JSON schema into an object
     """
-    with open(podcast_schema_path, 'r') as read_file:
+    with open(consts.podcast_schema_path, 'r') as read_file:
         schema = json.load(read_file)
     return schema
 
@@ -22,11 +17,11 @@ def get_rss_feed():
     """
     Get RSS feed for the podcast
     """
-    feed = feedparser.parse(feed_url)
+    feed = feedparser.parse(consts.feed_url)
     return feed
 
 
-def get_podcast_entries():
+def get_podcast_entries() -> list[object]:
     """
     Get podcast entries from RSS feed
     """
@@ -35,7 +30,7 @@ def get_podcast_entries():
     return podcast_entries
 
 
-def get_title(entry):
+def get_title(entry: dict) -> str:
     """
     Get title of podcast
     """
@@ -43,7 +38,7 @@ def get_title(entry):
     return title
 
 
-def get_podcast_number(entry):
+def get_podcast_number(entry: dict) -> int:
     """
     Get number of the podcast
     """
@@ -59,16 +54,16 @@ def get_podcast_number(entry):
 
     end = title.index(' ', start)
     num = title[start:end]
-    return num
+    return int(num)
 
 
-def get_guest_name(entry):
+def get_guest_name(entry: dict) -> str:
     """
     Get guest name from link
         Example: `https://lexfridman.com/max-tegmark/`
     """
     link = entry['link']
-    name = link.replace(url, '')
+    name = link.replace(consts.url, '')
     name = name.replace('-', ' ')
     # Get rid of non-alphabetic characters besides ' '
     name = ''.join([c for c in name if c.isalpha() or c == ' ']).strip()
@@ -77,7 +72,7 @@ def get_guest_name(entry):
     return name
 
 
-def get_date(entry):
+def get_date(entry: dict) -> str:
     """
     Get date of publication
     """
@@ -88,7 +83,7 @@ def get_date(entry):
     return month + '/' + day + '/' + year
 
 
-def get_url(entry):
+def get_url(entry: dict) -> str:
     """
     Get link to podcast
     """
@@ -96,7 +91,7 @@ def get_url(entry):
     return url
 
 
-def get_description(entry):
+def get_description(entry: dict) -> str:
     """
     Get description of podcast
     """
@@ -104,7 +99,7 @@ def get_description(entry):
     return description
 
 
-def extract_podcast_info(entry):
+def extract_podcast_info(entry) -> dict:
     """
     Extract information into JSON from a podcast RSS entry
     """
@@ -129,6 +124,5 @@ if __name__ == "__main__":
         id = info['id']
         info_map[id] = info
 
-    with open(output_file_path, 'w') as f:
+    with open(consts.podcast_output_file_path, 'w') as f:
         json.dump(info_map, f)
-
