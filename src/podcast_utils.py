@@ -96,6 +96,8 @@ def get_description(entry: dict) -> str:
     Get description of podcast
     """
     description = entry['summary']
+    first_linebreak = description.find('<br />')
+    description = description[:first_linebreak] # Get only first paragraph
     return description
 
 
@@ -115,7 +117,7 @@ def extract_podcast_info(entry) -> dict:
     return info
 
 
-if __name__ == "__main__":
+def main():
     entries = get_podcast_entries()
 
     info_map = dict()
@@ -126,3 +128,7 @@ if __name__ == "__main__":
 
     with open(PODCASTS_OUTPUT_PATH, 'w') as f:
         json.dump(info_map, f)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,6 +1,6 @@
 {
 	"id": "ID of podcast (podcast number)",
-	"reccomendations": [
+	"recommendations": [
 		{
 			"book_title": "Title of book",
 			"author": "Author of book",
