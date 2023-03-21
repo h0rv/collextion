@@ -18,6 +18,13 @@ Final project for CS 1699 Practical AI, Spring 2023.
   ./convert_all.sh
   ```
 
+## Running the Backend
+
+  ```bash
+  cd src/
+  ./main.py
+  ```
+
 ## Running the site
 
   ```bash
