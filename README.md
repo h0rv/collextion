@@ -8,6 +8,7 @@ Final project for CS 1699 Practical AI, Spring 2023.
 
   ```bash
   pip install -r requirements.txt
+  python -m spacy download en_core_web_sm
   python -m spacy download en_core_web_lg
   ```
 

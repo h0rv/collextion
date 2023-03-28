@@ -1,10 +1,8 @@
 from consts import *
 from podcast_utils import *
+import model
 
 from os import listdir
-import spacy
-from spacy.language import Language
-from spacy.tokens import Doc
 from typing import Generator
 
 
@@ -52,32 +50,21 @@ def get_transcript_files_gen() -> Generator:
     return file_paths_gen
 
 
-def init_spacy() -> Language:
-    """
-    Initaliaze spacy
-    """
-    nlp = spacy.load("en_core_web_sm")
-    return nlp
-
-
-def tokenize_transcript(nlp: Language, transcript: str) -> Doc:
-    """
-    Tokenize podcast transcript; returns spacy document
-    """
-    doc = nlp(transcript)
-    return doc
-
-
 def get_book_recommendations(fname: str):
     """
     Get book recommendations from podcast transcript
     """
-    book = get_book_schema()
+    book_json = get_book_schema()
 
-    book['id'] = get_transcript_num(fname)
-    book['recomendations'] = []
+    transcript = open(fname, 'r').read()
 
-    return book
+    book_json['id'] = get_transcript_num(fname)
+
+    books = model.extract_books(transcript)
+    for book in books:
+        book_json['recommendations'].append({'book_title': book})
+
+    return book_json
 
 
 def main():
