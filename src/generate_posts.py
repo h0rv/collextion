@@ -1,3 +1,5 @@
+#generate_posts.py
+
 from consts import *
 
 import json
@@ -78,12 +80,17 @@ def write_podcast_info(file, podcast):
     date = '  - Description: ' + podcast['description'] + '\n'
     file.write(date)
 
-
+'''
 def write_book_recommendations(file, recommendations):
     heading = '\n## Book Recommendations\n\n'
     file.write(heading)
-    file.write(str(recommendations))
-    # TODO
+    try:                                    #catch an error I got during runtime, use utf-8 format
+        file.write(str(recommendations))
+    except UnicodeEncodeError as e:
+        print(f"Caught UnicodeEncodeError: {e}")
+        recommendations_str = str(recommendations).encode("utf-8", errors="ignore").decode()
+        file.write(recommendations_str)
+    # 
     # writer = MarkdownTableWriter(
     #     table_name="example_table",
     #     headers=["int", "float", "str", "bool", "mix", "time"],
@@ -93,7 +100,29 @@ def write_book_recommendations(file, recommendations):
     # )
     # writer.write_table()
     # writer.close()
+'''
 
+def write_book_recommendations(file, recommendations):
+    heading = '\n## Book Recommendations\n\n'
+    file.write(heading)
+
+    for book in recommendations:
+        print(book)
+        title = f"{book['book_title']}\n"
+        author = f"{book['book_author']}\n"
+        cover = f"{book['book_cover']}\n"
+        isbn = f"{book['ISBN']}\n"
+        book_url = f"{book['book_link']}\n"
+
+
+        # Write each book's information with two spaces indentation
+        file.write(f"  - Title: {title}")
+        file.write(f"    Author: {author}")
+        file.write(f"    Cover: {cover}")
+        file.write(f"    ISBN: {isbn}")
+        file.write(f"    Book_URL: {book_url}")
+        # Add two blank lines to separate each book's information
+        file.write("\n\n")
 
 def main():
     podcasts = load_podcasts()
