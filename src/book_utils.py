@@ -1,10 +1,13 @@
+#books_util.py
 from consts import *
 from podcast_utils import *
 import model
 
+
 from os import listdir
 from typing import Generator
 
+global count
 
 def get_book_schema() -> dict:
     """
@@ -49,6 +52,18 @@ def get_transcript_files_gen() -> Generator:
     file_paths_gen = (path + f for f in files)
     return file_paths_gen
 
+def extract_book_info(book: dict) -> dict:   #prevent errors in get_book_recommendations
+    """
+    Extract relevant information about the book from the API response
+    """
+    book_info = {}
+    book_info['book_title'] = book['title']
+    book_info['book_author'] = book.get('authors', [''])[0]  #if no author, blank
+    book_info['book_cover'] = book['image_url']
+    book_info['ISBN'] = book['isbn'] if 'isbn' in book else ''
+    book_info['url'] = book['link'] if 'link' in book else ''
+    return book_info
+
 
 def get_book_recommendations(fname: str):
     """
@@ -56,30 +71,45 @@ def get_book_recommendations(fname: str):
     """
     book_json = get_book_schema()
 
-    transcript = open(fname, 'r').read()
+    transcript = open(fname, 'r', encoding="utf-8", errors="ignore").read()
 
     book_json['id'] = get_transcript_num(fname)
 
     books = model.extract_books(transcript)
     for book in books:
-        book_json['recommendations'].append({'book_title': book})
+        book_info = extract_book_info(book)
+        book_json['recommendations'].append({
+            'book_title': book_info['book_title'],
+            'book_author': book_info['book_author'],
+            'book_cover': book_info['book_cover'],
+            'ISBN' : book_info['ISBN'],
+            'book_link': book_info['url']
+        })
 
     return book_json
 
 
 def main():
+  #  global count
+  #  count = 0
     files = get_transcript_files_gen()
-
     book_map = dict()
     for f in files:
-        book = get_book_recommendations(f)
-        id = book['id']
-        book_map[id] = book
+     #   if count == 15:
+          #  break
+    #    else:
+            book = get_book_recommendations(f)
+            id = book['id']
+            book_map[id] = book
+       #     count += 1
 
     book_map = dict(sorted(book_map.items(), reverse=True))
 
     with open(BOOKS_OUTPUT_PATH, 'w') as f:
         json.dump(book_map, f)
+
+
+
 
 
 if __name__ == "__main__":
