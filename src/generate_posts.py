@@ -102,28 +102,27 @@ def write_book_recommendations(file, recommendations):
     # writer.close()
 '''
 
-
 def write_book_recommendations(file, recommendations):
     heading = '\n## Book Recommendations\n\n'
     file.write(heading)
 
     for book in recommendations:
-        print(book)
-        title = f"{book['book_title']}\n"
-        author = f"{book['book_author']}\n"
-        cover = f"{book['book_cover']}\n"
-        isbn = f"{book['ISBN']}\n"
-        book_url = f"{book['book_link']}\n"
+        title = f"{book['book_title']}"
+        author = f"{book['book_author']}"
+        cover = f"{book['book_cover']}"
+        isbn = f"{book['ISBN']}"
+        book_url = f"{book['book_link']}"
 
-        # Write each book's information with two spaces indentation
+        # Write each book's information with cover image and text in two columns
+        file.write('<table style="border: none;"><tr style="border: none;">')
+        file.write(f'<td style="border: none;"><img src="{cover}" alt="{title}" width="150" style="vertical-align: top;"></td>')
+        file.write('<td style="border: none; vertical-align: top;">')
+        file.write(f"<h3 style='margin-top: 5'>{title}</h3>")
+        file.write(f"<p><strong>Author:</strong> {author}</p>")
+        file.write(f"<p><strong>ISBN:</strong> {isbn}</p>")
+        file.write(f'<p><strong>Book URL:</strong> <a href="{book_url}">{book_url}</a></p>')
+        file.write('</td></tr></table>\n')
 
-        file.write(f"  - ![Cover]({cover})\n ")
-        file.write(f"    - Title: {title}\n")
-        file.write(f"    - Author: {author}\n")
-        file.write(f"    - ISBN: {isbn}\n")
-        file.write(f"    - Book_URL: [Book link]({book_url})\n")
-        # Add two blank lines to separate each book's information
-        file.write("\n\n")
 
 
 def main():
