@@ -3,10 +3,10 @@
 	"recommendations": [
 		{
 			"book_title": "Title of book",
-			"author": "Author of book",
-			"isbn": "ISBN number",
-			"url": "Link to more information about book",
-			"cover_url": "Link to cover of book"
+			"book_author": "Author of book",
+			"ISBN": "ISBN number",
+			"book_link": "Link to more information about book",
+			"book_cover": "Link to cover of book"
 		}
 	]
 }
