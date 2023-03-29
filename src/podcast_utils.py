@@ -1,7 +1,7 @@
-from consts import *
-
 import json
 import feedparser
+
+from consts import *
 
 
 def get_podcast_schema() -> dict:

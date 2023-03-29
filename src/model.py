@@ -1,20 +1,20 @@
-#model.py
 import json
-import spacy
-import requests
-
-
 from typing import List
 
+import requests
+import spacy
 
-MODEL_SIZE = "en_core_web_sm" # small
+
+MODEL_SIZE = "en_core_web_sm"  # small
 # MODEL = "en_core_web_lg"    # large
 
 
 model = None
+
+
 def extract_books(transcript: str) -> List[dict]:
     global model
-    if model == None:
+    if model is None:
         model = spacy.load(MODEL_SIZE)
 
     doc = model(transcript)
@@ -33,13 +33,17 @@ def extract_books(transcript: str) -> List[dict]:
                     # Extract book details
                     book_dict = {}
                     book_dict['title'] = book['volumeInfo']['title']
-                    book_dict['authors'] = book['volumeInfo'].get('authors', ['']) #ran into this error, case where they don't have author
-                    book_dict['isbn'] = book['volumeInfo'].get('industryIdentifiers', [{'identifier': ''}])[0]['identifier']
-                    book_dict['image_url'] = book['volumeInfo'].get('imageLinks', {}).get('thumbnail')
-                    book_dict['link'] = book['volumeInfo'].get('canonicalVolumeLink', '')
+                    # ran into this error, case where they don't have author
+                    book_dict['authors'] = book['volumeInfo'].get(
+                        'authors', [''])
+                    book_dict['isbn'] = book['volumeInfo'].get(
+                        'industryIdentifiers', [{'identifier': ''}])[0]['identifier']
+                    book_dict['image_url'] = book['volumeInfo'].get(
+                        'imageLinks', {}).get('thumbnail')
+                    book_dict['link'] = book['volumeInfo'].get(
+                        'canonicalVolumeLink', '')
                     books.append(book_dict)
     return books
-
 
 
 def load_data(file):

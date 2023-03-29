@@ -1,9 +1,8 @@
-#generate_posts.py
+import json
+
+from pytablewriter import MarkdownTableWriter
 
 from consts import *
-
-import json
-from pytablewriter import MarkdownTableWriter
 
 
 def load_podcasts() -> dict:
@@ -80,6 +79,7 @@ def write_podcast_info(file, podcast):
     date = '  - Description: ' + podcast['description'] + '\n'
     file.write(date)
 
+
 '''
 def write_book_recommendations(file, recommendations):
     heading = '\n## Book Recommendations\n\n'
@@ -102,6 +102,7 @@ def write_book_recommendations(file, recommendations):
     # writer.close()
 '''
 
+
 def write_book_recommendations(file, recommendations):
     heading = '\n## Book Recommendations\n\n'
     file.write(heading)
@@ -114,15 +115,16 @@ def write_book_recommendations(file, recommendations):
         isbn = f"{book['ISBN']}\n"
         book_url = f"{book['book_link']}\n"
 
-
         # Write each book's information with two spaces indentation
-        file.write(f"  - Title: {title}")
-        file.write(f"    Author: {author}")
-        file.write(f"    Cover: {cover}")
-        file.write(f"    ISBN: {isbn}")
-        file.write(f"    Book_URL: {book_url}")
+
+        file.write(f"  - ![Cover]({cover})\n ")
+        file.write(f"    - Title: {title}\n")
+        file.write(f"    - Author: {author}\n")
+        file.write(f"    - ISBN: {isbn}\n")
+        file.write(f"    - Book_URL: [Book link]({book_url})\n")
         # Add two blank lines to separate each book's information
         file.write("\n\n")
+
 
 def main():
     podcasts = load_podcasts()
