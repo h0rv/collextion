@@ -73,7 +73,7 @@ def write_yaml_block(file, podcast):
 def get_thumbnail(podcast):
     # Build the search query for the YouTube Data API
     search_query = podcast['title'] + ' podcast'
-    youtube = googleapiclient.discovery.build('youtube', 'v3', developerKey='AIzaSyCuZ5iKCO1A6Gj19VCZ7tx6LFqXEGJa6No')
+    youtube = googleapiclient.discovery.build('youtube', 'v3', developerKey='API_KEY')
     request = youtube.search().list(
         q=search_query,
         type='video',
