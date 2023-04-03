@@ -1,4 +1,6 @@
+#generate_posts.py
 import json
+import googleapiclient.discovery
 
 from pytablewriter import MarkdownTableWriter
 
@@ -48,9 +50,8 @@ def write_yaml_block(file, podcast):
     description = 'description: |\n' + "  " + podcast['description'] + '"\n'
     file.write(description)
 
-    # TODO
-    # thumbnail_path = 'thumb: ' + '\'' + thumbnail_path + '\''
-    thumbnail_path = 'thumb: ' + '"' + "" + '"\n'
+    thumbnail_url = get_thumbnail(podcast)  # call the get_thumbnail() function
+    thumbnail_path = 'thumb: ' + '"' + thumbnail_url + '"\n'
     file.write(thumbnail_path)
 
     # TODO: Wasn't working with 11ty template
@@ -66,6 +67,26 @@ def write_yaml_block(file, podcast):
     #     file.write(tag)
 
     file.write(block)
+
+
+
+def get_thumbnail(podcast):
+    # Build the search query for the YouTube Data API
+    search_query = podcast['title'] + ' podcast'
+    youtube = googleapiclient.discovery.build('youtube', 'v3', developerKey='AIzaSyCuZ5iKCO1A6Gj19VCZ7tx6LFqXEGJa6No')
+    request = youtube.search().list(
+        q=search_query,
+        type='video',
+        part='snippet',
+        maxResults=1
+    )
+    response = request.execute()
+    video_id = response['items'][0]['id']['videoId']
+
+    # Construct the thumbnail URL
+    thumbnail_url = 'https://img.youtube.com/vi/{}/maxresdefault.jpg'.format(video_id)
+
+    return thumbnail_url
 
 
 def write_podcast_info(file, podcast):
@@ -145,6 +166,8 @@ def main():
         write_podcast_info(file, podcast)
 
         write_book_recommendations(file, recommendations)
+
+     #   get_thumbnail(podcast)
 
         file.close()
 
