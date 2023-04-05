@@ -43,6 +43,7 @@ Final project for CS 1699 Practical AI, Spring 2023.
   - [ ] Host on Google Cloud
   - [ ] Remove duplicate posts
   - [ ] Increase model accuracy
+    - [ ] Look into a case-_insensitve_ model that does not rely on capitalization (this is bottlenecked by Whisper)
   - [ ] Categorizing recommendations
   - [ ] Setup `env` for API keys
 
