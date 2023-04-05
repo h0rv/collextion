@@ -33,3 +33,16 @@ Final project for CS 1699 Practical AI, Spring 2023.
   npm install --prefix site/
   npm start   --prefix site/
   ``` 
+
+---
+
+## TODO
+
+  - [ ] OpenAI Whisper integration
+    - [ ] Add logic to be alerted of a new podcast post (likely from RSS feed)
+  - [ ] Host on Google Cloud
+  - [ ] Remove duplicate posts
+  - [ ] Increase model accuracy
+  - [ ] Categorizing recommendations
+  - [ ] Setup `env` for API keys
+
