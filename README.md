@@ -45,5 +45,7 @@ Final project for CS 1699 Practical AI, Spring 2023.
   - [ ] Increase model accuracy
     - [ ] Look into a case-_insensitve_ model that does not rely on capitalization (this is bottlenecked by Whisper)
   - [ ] Categorizing recommendations
+    - [ ] Add genre information to each book
+    - [ ] Create running lists of reccomended books. This will include a "reccomended_in" with each podcast it was mentioned 
   - [ ] Setup `env` for API keys
 
