@@ -1,3 +1,11 @@
+from os import environ
+from dotenv import load_dotenv
+
+load_dotenv()  # take environment variables from .env.
+
+# Secrets
+GOOGLE_API_KEY = environ.get('GOOGLE_API_KEY', "")
+
 # Links
 URL = 'https://lexfridman.com'
 FEED_URL = 'https://lexfridman.com/feed/podcast/'

@@ -12,6 +12,15 @@ Final project for CS 1699 Practical AI, Spring 2023.
   python -m spacy download en_core_web_lg
   ```
 
+## Secrets
+
+  ```bash
+    cp src/example.env 
+    cp src/.env 
+  ```
+
+  Fill in required secrets in `.env` file
+
 ## Download Pre-transcribed Transcripts
 
   ```bash

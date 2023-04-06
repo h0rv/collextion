@@ -2,6 +2,7 @@ import json
 import feedparser
 
 from os import path, makedirs
+from googleapiclient.discovery import build
 
 from consts import *
 
@@ -108,13 +109,40 @@ def get_mp3_url(entry: dict) -> str:
     return url
 
 
+def get_thumbnail_url(podcast: dict) -> str:
+    key = GOOGLE_API_KEY
+
+    if key == "":
+        print("Need Google API key in `.env` file. Exiting...")
+        exit(1)
+
+    # Build the search query for the YouTube Data API
+    search_query = podcast['title'] + ' podcast'
+    youtube = build('youtube', 'v3', developerKey=key)
+
+    request = youtube.search().list(
+        q=search_query,
+        type='video',
+        part='snippet',
+        maxResults=1
+    )
+    response = request.execute()
+    video_id = response['items'][0]['id']['videoId']
+
+    # Construct the thumbnail URL
+    thumbnail_url = 'https://img.youtube.com/vi/{}/maxresdefault.jpg'.format(
+        video_id)
+
+    return thumbnail_url
+
+
 def get_description(entry: dict) -> str:
     """
     Get description of podcast
     """
     description = entry['summary']
     first_linebreak = description.find('<br />')
-    description = description[:first_linebreak] # Get only first paragraph
+    description = description[:first_linebreak]  # Get only first paragraph
     return description
 
 
@@ -130,6 +158,7 @@ def extract_podcast_info(entry) -> dict:
     info['date'] = get_date(entry)
     info['url'] = get_url(entry)
     info['mp3'] = get_mp3_url(entry)
+    info['thumbnail'] = get_thumbnail_url(info)
     info['description'] = get_description(entry)
 
     return info
