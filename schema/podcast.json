@@ -4,5 +4,6 @@
 	"guest": "Podcast guest",
 	"date": "Date podcast was released",
 	"url": "Link to podcast",
+	"mp3": "Link to podcast's audio in mp3 format",
 	"description": "Description of podcast"
 }

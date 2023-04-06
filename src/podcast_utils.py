@@ -91,6 +91,21 @@ def get_url(entry: dict) -> str:
     return url
 
 
+def get_mp3_url(entry: dict) -> str:
+    """
+    Get link to MP3 to podcast
+    """
+    url = ""
+
+    links = entry['links']
+    for link in links:
+        if link['type'] == 'audio/mpeg':
+            url = link['href']
+            break
+
+    return url
+
+
 def get_description(entry: dict) -> str:
     """
     Get description of podcast
@@ -112,6 +127,7 @@ def extract_podcast_info(entry) -> dict:
     info['guest'] = get_guest_name(entry)
     info['date'] = get_date(entry)
     info['url'] = get_url(entry)
+    info['mp3'] = get_mp3_url(entry)
     info['description'] = get_description(entry)
 
     return info
