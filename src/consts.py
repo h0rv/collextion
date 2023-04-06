@@ -8,8 +8,9 @@ PODCAST_SCHEMA_PATH = SCHEMA_PATH + '/podcast.json'
 BOOK_SCHEMA_PATH = SCHEMA_PATH + '/book.json'
 
 # File paths
-PODCASTS_OUTPUT_PATH = "podcasts.json"
-BOOKS_OUTPUT_PATH = "books.json"
+OUTPUT_PATH = "out/"
+PODCASTS_OUTPUT_PATH = OUTPUT_PATH + "podcasts.json"
+BOOKS_OUTPUT_PATH = OUTPUT_PATH + "books.json"
 TRANSCRIPTS_DIR_PATH = "../data/lexicap"
 TRANSCRIPT_NAME_PREFIX = "episode_"
 TRANSCRIPT_NAME_SUFFIX = ".txt"

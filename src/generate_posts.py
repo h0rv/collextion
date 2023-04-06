@@ -1,4 +1,3 @@
-#generate_posts.py
 import json
 import googleapiclient.discovery
 
@@ -69,11 +68,11 @@ def write_yaml_block(file, podcast):
     file.write(block)
 
 
-
 def get_thumbnail(podcast):
     # Build the search query for the YouTube Data API
     search_query = podcast['title'] + ' podcast'
-    youtube = googleapiclient.discovery.build('youtube', 'v3', developerKey='API_KEY')
+    youtube = googleapiclient.discovery.build(
+        'youtube', 'v3', developerKey='API_KEY')
     request = youtube.search().list(
         q=search_query,
         type='video',
@@ -84,7 +83,8 @@ def get_thumbnail(podcast):
     video_id = response['items'][0]['id']['videoId']
 
     # Construct the thumbnail URL
-    thumbnail_url = 'https://img.youtube.com/vi/{}/maxresdefault.jpg'.format(video_id)
+    thumbnail_url = 'https://img.youtube.com/vi/{}/maxresdefault.jpg'.format(
+        video_id)
 
     return thumbnail_url
 
@@ -101,28 +101,6 @@ def write_podcast_info(file, podcast):
     file.write(date)
 
 
-'''
-def write_book_recommendations(file, recommendations):
-    heading = '\n## Book Recommendations\n\n'
-    file.write(heading)
-    try:                                    #catch an error I got during runtime, use utf-8 format
-        file.write(str(recommendations))
-    except UnicodeEncodeError as e:
-        print(f"Caught UnicodeEncodeError: {e}")
-        recommendations_str = str(recommendations).encode("utf-8", errors="ignore").decode()
-        file.write(recommendations_str)
-    # 
-    # writer = MarkdownTableWriter(
-    #     table_name="example_table",
-    #     headers=["int", "float", "str", "bool", "mix", "time"],
-    #     value_matrix=[
-    #         [0,   0.1,      "hoge", True,   0,      "2017-01-01 03:04:05+0900"],
-    #     ],
-    # )
-    # writer.write_table()
-    # writer.close()
-'''
-
 def write_book_recommendations(file, recommendations):
     heading = '\n## Book Recommendations\n\n'
     file.write(heading)
@@ -136,14 +114,15 @@ def write_book_recommendations(file, recommendations):
 
         # Write each book's information with cover image and text in two columns
         file.write('<table style="border: none;"><tr style="border: none;">')
-        file.write(f'<td style="border: none;"><img src="{cover}" alt="{title}" width="150" style="vertical-align: top;"></td>')
+        file.write(
+            f'<td style="border: none;"><img src="{cover}" alt="{title}" width="150" style="vertical-align: top;"></td>')
         file.write('<td style="border: none; vertical-align: top;">')
         file.write(f"<h3 style='margin-top: 5'>{title}</h3>")
         file.write(f"<p><strong>Author:</strong> {author}</p>")
         file.write(f"<p><strong>ISBN:</strong> {isbn}</p>")
-        file.write(f'<p><strong>Book URL:</strong> <a href="{book_url}">{book_url}</a></p>')
+        file.write(
+            f'<p><strong>Book URL:</strong> <a href="{book_url}">{book_url}</a></p>')
         file.write('</td></tr></table>\n')
-
 
 
 def main():
@@ -162,12 +141,8 @@ def main():
         file = create_post_file(id)
 
         write_yaml_block(file, podcast)
-
         write_podcast_info(file, podcast)
-
         write_book_recommendations(file, recommendations)
-
-     #   get_thumbnail(podcast)
 
         file.close()
 

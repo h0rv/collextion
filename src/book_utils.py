@@ -1,11 +1,12 @@
 # books_util.py
 import json
-from os import listdir
+from os import listdir, path, makedirs
 from typing import Generator
 
 from consts import *
 import model
 from podcast_utils import *
+
 
 def get_book_schema() -> dict:
     """
@@ -100,6 +101,9 @@ def main():
         book_map[id] = book
 
     book_map = dict(sorted(book_map.items(), reverse=True))
+
+    if not path.exists(OUTPUT_PATH):
+        makedirs(OUTPUT_PATH)
 
     with open(BOOKS_OUTPUT_PATH, 'w') as f:
         json.dump(book_map, f)
