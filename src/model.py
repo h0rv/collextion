@@ -19,6 +19,7 @@ def extract_books(transcript: str) -> List[dict]:
 
     doc = model(transcript)
     books = []
+    titles_seen = set()
     for ent in doc.ents:
         if ent.label_ == "WORK_OF_ART":
             book_title = ent.text
@@ -33,6 +34,9 @@ def extract_books(transcript: str) -> List[dict]:
                     # Extract book details
                     book_dict = {}
                     book_dict['title'] = book['volumeInfo']['title']
+                    if book_dict['title'] in titles_seen:
+                        # Skip duplicate
+                        continue
                     # ran into this error, case where they don't have author
                     book_dict['authors'] = book['volumeInfo'].get(
                         'authors', [''])
@@ -43,6 +47,7 @@ def extract_books(transcript: str) -> List[dict]:
                     book_dict['link'] = book['volumeInfo'].get(
                         'canonicalVolumeLink', '')
                     books.append(book_dict)
+                    titles_seen.add(book_dict['title'])
     return books
 
 

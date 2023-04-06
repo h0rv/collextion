@@ -173,8 +173,8 @@ def main():
         id = info['id']
         info_map[id] = info
 
-    if not os.path.exists(OUTPUT_PATH):
-        os.makedirs(OUTPUT_PATH)
+    if not path.exists(OUTPUT_PATH):
+        makedirs(OUTPUT_PATH)
 
     with open(PODCASTS_OUTPUT_PATH, 'w') as f:
         json.dump(info_map, f)

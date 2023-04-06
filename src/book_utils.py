@@ -1,4 +1,3 @@
-# books_util.py
 import json
 from os import listdir, path, makedirs
 from typing import Generator

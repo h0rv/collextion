@@ -50,11 +50,11 @@ Final project for CS 1699 Practical AI, Spring 2023.
   - [ ] OpenAI Whisper integration
     - [ ] Add logic to be alerted of a new podcast post (likely from RSS feed)
   - [ ] Host on Google Cloud
-  - [ ] Remove duplicate posts
+  - [x] Remove duplicate posts
   - [ ] Increase model accuracy
     - [ ] Look into a case-_insensitve_ model that does not rely on capitalization (this is bottlenecked by Whisper)
   - [ ] Categorizing recommendations
     - [ ] Add genre information to each book
     - [ ] Create running lists of reccomended books. This will include a "reccomended_in" with each podcast it was mentioned 
-  - [ ] Setup `env` for API keys
+  - [x] Setup `env` for API keys
 
