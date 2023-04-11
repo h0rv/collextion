@@ -1,18 +1,15 @@
 import json
-from typing import List
+
+from consts import *
 
 import requests
 import spacy
 
 
-MODEL_SIZE = "en_core_web_sm"  # small
-# MODEL = "en_core_web_lg"    # large
-
-
 model = None
 
 
-def extract_books(transcript: str) -> List[dict]:
+def extract_books(transcript: str) -> [dict]:
     global model
     if model is None:
         model = spacy.load(MODEL_SIZE)

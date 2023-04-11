@@ -6,6 +6,10 @@ load_dotenv()  # take environment variables from .env.
 # Secrets
 GOOGLE_API_KEY = environ.get('GOOGLE_API_KEY', "")
 
+# Model
+# MODEL_SIZE = "en_core_web_sm"  # small
+MODEL_SIZE = "en_core_web_lg"  # large
+
 # Links
 URL = 'https://lexfridman.com'
 FEED_URL = 'https://lexfridman.com/feed/podcast/'

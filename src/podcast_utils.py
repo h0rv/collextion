@@ -3,6 +3,7 @@ import feedparser
 
 from os import path, makedirs
 from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 
 from consts import *
 
@@ -126,12 +127,18 @@ def get_thumbnail_url(podcast: dict) -> str:
         part='snippet',
         maxResults=1
     )
-    response = request.execute()
+
+    try:
+        response = request.execute()
+    except HttpError:
+        # Prevents crashing when daily API quota is reached
+        # TODO: Workaround
+        return ''
+
     video_id = response['items'][0]['id']['videoId']
 
     # Construct the thumbnail URL
-    thumbnail_url = 'https://img.youtube.com/vi/{}/maxresdefault.jpg'.format(
-        video_id)
+    thumbnail_url = f'https://img.youtube.com/vi/{video_id}/maxresdefault.jpg'
 
     return thumbnail_url
 
