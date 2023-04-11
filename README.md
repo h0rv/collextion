@@ -53,6 +53,7 @@ Final project for CS 1699 Practical AI, Spring 2023.
   - [x] Remove duplicate posts
   - [ ] Increase model accuracy
     - [ ] Look into a case-_insensitve_ model that does not rely on capitalization (this is bottlenecked by Whisper)
+    - [x] "Capitalization normalization" did not work
   - [ ] Categorizing recommendations
     - [ ] Add genre information to each book
     - [ ] Create running lists of reccomended books. This will include a "reccomended_in" with each podcast it was mentioned 
