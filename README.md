@@ -7,6 +7,7 @@ Final project for CS 1699 Practical AI, Spring 2023.
 ## Install dependencies
 
   ```bash
+  cd src/
   pip install -r requirements.txt
   python -m spacy download en_core_web_sm
   python -m spacy download en_core_web_lg
@@ -36,12 +37,26 @@ Final project for CS 1699 Practical AI, Spring 2023.
   ./main.py
   ```
 
+### With Docker
+
+  ```
+  cd src/
+  docker run --rm -it $(docker build -q .)
+  ```
+
 ## Running the site
 
   ```bash
   npm install --prefix site/
   npm start   --prefix site/
   ``` 
+
+### With Docker
+
+  ```
+  cd site/
+  docker run --name site --rm -it $(docker build -q .)
+  ```
 
 ---
 
