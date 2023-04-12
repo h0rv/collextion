@@ -37,13 +37,6 @@ Final project for CS 1699 Practical AI, Spring 2023.
   ./main.py
   ```
 
-### With Docker
-
-  ```
-  cd src/
-  docker run --rm -it $(docker build -q .)
-  ```
-
 ## Running the site
 
   ```bash
@@ -51,10 +44,9 @@ Final project for CS 1699 Practical AI, Spring 2023.
   npm start   --prefix site/
   ``` 
 
-### With Docker
+## Running with Docker
 
   ```
-  cd site/
   docker run --name site --rm -it $(docker build -q .)
   ```
 
