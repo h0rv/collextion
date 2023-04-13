@@ -8,8 +8,8 @@
     "serve": "concurrently -c auto npm:css:watch npm:11ty:serve",
     "build": "npm run css:build && npm run 11ty:build",
     "debug": "cross-env DEBUG=Eleventy* npm run build",
-    "11ty:watch": "cross-env PORT=$PORT NODE_ENV=development eleventy --watch --incremental",
-    "11ty:serve": "cross-env PORT=$PORT NODE_ENV=development eleventy --serve --incremental",
+    "11ty:watch": "cross-env PORT=$PORT NODE_ENV=development eleventy --watch --incremental --port 8080",
+    "11ty:serve": "cross-env PORT=$PORT NODE_ENV=development eleventy --serve --incremental --port 8080",
     "11ty:build": "cross-env NODE_ENV=production eleventy",
     "css:watch": "tailwindcss -i src/assets/css/main.css -o dist/assets/css/main.css -w",
     "css:build": "tailwindcss -i src/assets/css/main.css -o dist/assets/css/main.css -m"

@@ -7,5 +7,5 @@ if [ ! -f data/lexicap.zip ]; then
 	curl -o data/lexicap.zip "https://karpathy.ai/lexicap/data.zip"
 fi
 
-unzip -j data/lexicap.zip vtt/*large.vtt -d data/lexicap
+unzip -j -o data/lexicap.zip vtt/*large.vtt -d data/lexicap
 
