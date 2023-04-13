@@ -18,8 +18,8 @@ FEED_URL = "https://lexfridman.com/feed/podcast/"
 
 # Schema
 SCHEMA_PATH = path.join(cwd, "..", "schema")
-PODCAST_SCHEMA_PATH = path.join(SCHEMA_PATH, "/podcast.json")
-BOOK_SCHEMA_PATH = path.join(SCHEMA_PATH + "/book.json")
+PODCAST_SCHEMA_PATH = path.join(SCHEMA_PATH, "podcast.json")
+BOOK_SCHEMA_PATH = path.join(SCHEMA_PATH + "book.json")
 
 # File paths
 OUTPUT_PATH = path.join(cwd, "out")

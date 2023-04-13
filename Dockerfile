@@ -8,6 +8,12 @@ RUN python -m spacy download en_core_web_lg
 
 COPY /src/ .
 
+WORKDIR /app/
+COPY *.sh .
+
+RUN bash ./download_transcripts.sh
+RUN bash ./convert_all.sh
+
 FROM node:latest as frontend
 
 # Copy the Python interpreter and libraries from the backend stage
@@ -17,6 +23,9 @@ COPY --from=backend /usr/local/lib/libpython3.9.so.1.0 /usr/local/lib/
 
 # Copy the src directory from the backend stage
 COPY --from=backend /app/src/ /app/src/
+COPY --from=backend /app/data/ /app/data/
+
+COPY /schema/ /app/schema/
 
 WORKDIR /app/site/
 COPY /site/package.json .
