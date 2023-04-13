@@ -15,7 +15,7 @@ URL = 'https://lexfridman.com'
 FEED_URL = 'https://lexfridman.com/feed/podcast/'
 
 # Schema
-SCHEMA_PATH = '../schema'
+SCHEMA_PATH = 'schema'
 PODCAST_SCHEMA_PATH = SCHEMA_PATH + '/podcast.json'
 BOOK_SCHEMA_PATH = SCHEMA_PATH + '/book.json'
 
