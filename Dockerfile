@@ -27,6 +27,6 @@ COPY /site/ .
 
 EXPOSE $PORT
 
-CMD python /app/src/model.py && \
-	npm run server
+CMD python /app/src/main.py && \
+	npm run start
 
