@@ -57,6 +57,10 @@ Final project for CS 1699 Practical AI, Spring 2023.
   - [ ] OpenAI Whisper integration
     - [ ] Add logic to be alerted of a new podcast post (likely from RSS feed)
   - [ ] Host on Google Cloud
+    - [x] Create Dockerfile
+    - [x] Automatic triggers and builds on pushes to main
+    - [ ] Run container on GC
+    - [ ] Run cron job to check for new podcast
   - [x] Remove duplicate posts
   - [ ] Increase model accuracy
     - [ ] Look into a case-_insensitve_ model that does not rely on capitalization (this is bottlenecked by Whisper)

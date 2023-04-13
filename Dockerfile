@@ -28,5 +28,5 @@ COPY /site/ .
 EXPOSE 8080
 
 CMD python /app/src/model.py \
-	npm start --prefix /app/site/
+	npx @11ty/eleventy --serve --port=$PORT
 
