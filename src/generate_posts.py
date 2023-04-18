@@ -1,7 +1,6 @@
 import json
-import googleapiclient.discovery
 
-from pytablewriter import MarkdownTableWriter
+import datetime
 
 from consts import *
 
@@ -108,6 +107,8 @@ def main():
     podcasts = load_podcasts()
     books_list = load_books()
 
+    processed_podcast_ids = []
+
     for id, books in books_list.items():
         # Skip if no corresponding podcast
         if id not in podcasts:
@@ -123,7 +124,16 @@ def main():
         write_podcast_info(file, podcast)
         write_book_recommendations(file, recommendations)
 
+        # Add podcast to processed list
+        processed_podcast_ids += id
+
         file.close()
+
+    with open(PROCESSED_PODCASTS_FILE, "w") as f:
+        json.dump({
+            "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            "podcast_ids": processed_podcast_ids,
+        }, f)
 
 
 if __name__ == "__main__":

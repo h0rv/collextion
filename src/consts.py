@@ -31,3 +31,4 @@ TRANSCRIPT_NAME_SUFFIX = ".txt"
 POSTS_OUTPUT_PATH = path.join(cwd, "..", "site", "src", "posts")
 POST_NAME_PREFIX = "ep_"
 POST_NAME_SUFFIX = ".md"
+PROCESSED_PODCASTS_FILE = path.join(OUTPUT_PATH, "processed_podcasts.json")
