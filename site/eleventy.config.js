@@ -17,6 +17,10 @@ module.exports = (config) => {
   config.addCollection('pagedPosts', require('./lib/collections/pagedPosts'));
   config.addCollection('pagedPostsByGenre', require('./lib/collections/pagedPostsByGenre'));
 
+  config.addCollection('pagedPostsByBook', require('./lib/collections/pagedPostsByBook'));
+  config.addCollection('mostCommon', require('./lib/collections/mostCommon'));
+
+
   return {
     dir: {
       input: 'src',
