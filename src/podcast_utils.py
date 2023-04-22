@@ -4,6 +4,7 @@ import feedparser
 from os import path, makedirs
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from typing import Set
 
 from consts import *
 
@@ -25,13 +26,27 @@ def get_rss_feed():
     return feed
 
 
-def get_podcast_entries() -> list[object]:
+def get_podcast_entries() -> [object]:
     """
     Get podcast entries from RSS feed
     """
     feed = get_rss_feed()
     podcast_entries = feed['entries']
     return podcast_entries
+
+
+def podcast_entries_to_filter(entries: [object]) -> Set[int]:
+    """
+    Return a set of podcast IDs to filter out (post already generated for them)
+    """
+    if not path.isfile(PROCESSED_PODCASTS_FILE):
+        return []
+
+    with open(PROCESSED_PODCASTS_FILE, 'r') as read_file:
+        processes_pods = json.load(read_file)
+
+    podcast_ids = set(processes_pods["podcast_ids"])
+    return podcast_ids
 
 
 def get_title(entry: dict) -> str:
@@ -174,17 +189,26 @@ def extract_podcast_info(entry) -> dict:
 def main():
     entries = get_podcast_entries()
 
+    to_filter = podcast_entries_to_filter(entries)
+
     info_map = dict()
     for entry in entries:
         info = extract_podcast_info(entry)
         id = info['id']
+        if id in to_filter:
+            # Skip podcast
+            continue
+
         info_map[id] = info
 
     if not path.exists(OUTPUT_PATH):
         makedirs(OUTPUT_PATH)
 
     with open(PODCASTS_OUTPUT_PATH, 'w') as f:
-        json.dump(info_map, f)
+        json.dump({
+            "podcasts": info_map,
+            "filtered_ids": to_filter,
+        }, f)
 
 
 if __name__ == "__main__":

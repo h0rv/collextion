@@ -19,12 +19,13 @@ FEED_URL = "https://lexfridman.com/feed/podcast/"
 # Schema
 SCHEMA_PATH = path.join(cwd, "..", "schema")
 PODCAST_SCHEMA_PATH = path.join(SCHEMA_PATH, "podcast.json")
-BOOK_SCHEMA_PATH = path.join(SCHEMA_PATH + "book.json")
+BOOK_SCHEMA_PATH = path.join(SCHEMA_PATH, "book.json")
 
 # File paths
 OUTPUT_PATH = path.join(cwd, "out")
 PODCASTS_OUTPUT_PATH = path.join(OUTPUT_PATH, "podcasts.json")
 BOOKS_OUTPUT_PATH = path.join(OUTPUT_PATH, "books.json")
+PROCESSED_PODCASTS_FILE = path.join(OUTPUT_PATH, "processed.json")
 TRANSCRIPTS_DIR_PATH = path.join(cwd, "..", "data", "lexicap")
 TRANSCRIPT_NAME_PREFIX = "episode_"
 TRANSCRIPT_NAME_SUFFIX = ".txt"

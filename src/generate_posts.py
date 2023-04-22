@@ -1,18 +1,19 @@
 import json
 
-import datetime
+from datetime import datetime
 
 from consts import *
 
 
-def load_podcasts() -> dict:
+def load_podcasts() -> (dict, [int]):
     """
     Load the podcast list JSON into an object
     """
     podcasts_path = PODCASTS_OUTPUT_PATH
     with open(podcasts_path, 'r') as read_file:
         podcasts = json.load(read_file)
-    return podcasts
+
+    return podcasts["podcasts"], podcasts["filtered_ids"]
 
 
 def load_books() -> dict:
@@ -48,7 +49,7 @@ def write_yaml_block(file, podcast):
     description = 'description: |\n' + "  " + podcast['description'] + '"\n'
     file.write(description)
 
-    thumbnail_url = get_thumbnail(podcast)  # call the get_thumbnail() function
+    thumbnail_url = podcast['thumbnail']
     thumbnail_path = 'thumb: ' + '"' + thumbnail_url + '"\n'
     file.write(thumbnail_path)
 
@@ -104,10 +105,11 @@ def write_book_recommendations(file, recommendations):
 
 
 def main():
-    podcasts = load_podcasts()
+    podcasts, filtered_ids = load_podcasts()
     books_list = load_books()
 
-    processed_podcast_ids = []
+    # Append to already filtered out podcasts
+    processed_podcast_ids = filtered_ids
 
     for id, books in books_list.items():
         # Skip if no corresponding podcast
