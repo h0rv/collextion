@@ -1,0 +1,23 @@
+---
+layout: default
+eleventyExcludeFromCollections: true
+pagination:
+    data: collections.pagedPostsByBook
+    size: 1
+    alias: paged
+permalink: "books/{{ paged.bookName }}/{% if paged.number > 1 %}{{ paged.number }}/{% endif %}index.html"
+eleventyComputed:
+    title: "Interviews that recommend \"{{ paged.bookName | capitalize }}\""
+---
+
+<div class="mb-8 text-center">
+    <h3 class="text-xl font-medium text-slate-700 my-0">Interviews that recommend</h3>
+    <h1 class="text-4xl font-medium leading-normal mt-0">{{ paged.bookName | capitalize }}</h1>
+</div>
+<div class="flex flex-wrap -mx-2">
+    {% include "partials/post-grid.njk" %}
+</div>
+
+{% if collections.mostCommon[paged.bookName] > site.paginate %}
+{% include "partials/paginator.njk" %}
+{% endif %}
