@@ -6,10 +6,10 @@ layout: default
     <header class="mb-14">
         <h1 class="text-3xl text-center font-bold leading-normal text-slate-900 mt-0 mb-3">{{ title }}</h1>
         <div class="text-center">Published on {{ page.date | readableDate }}</div>
-        {% if tags %}
+        {% if genres %}
         <div class="mt-3 text-center">
-            {% for tag in tags %}
-            <a href="{{ '/tags/' | url }}{{ tag }}" class="inline-block bg-slate-200 rounded-full px-3 py-1 text-sm font-medium text-slate-700 m-0.5">#{{ tag }}</a>
+            {% for genre in genres %}
+            <a href="{{ '/genres/' | url }}{{ genre }}" class="inline-block bg-slate-200 rounded-full px-3 py-1 text-sm font-medium text-slate-700 m-0.5">#{{ genre }}</a>
             {% endfor %}
         </div>
         {% endif %}
