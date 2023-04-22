@@ -1,13 +1,13 @@
 const siteData = require('../../src/_data/site');
 
 module.exports = (coll) => {
-  const tagList = require('./mostCommon')(coll);
+  const bookList = require('./mostCommon')(coll);
 
   const maxPostsPerPage = siteData.paginate;
   const pagedPosts = [];
 
-  Object.keys(tagList).forEach((tagName) => {
-    const taggedPosts = [...coll.getFilteredByTag(tagName)].reverse();
+  Object.keys(bookList).forEach((bookName) => {
+    const taggedPosts = [...coll.getFilteredByTag(bookName)].reverse();
     const numberOfPages = Math.ceil(taggedPosts.length / maxPostsPerPage);
 
     for (let pageNum = 1; pageNum <= numberOfPages; pageNum++) {
