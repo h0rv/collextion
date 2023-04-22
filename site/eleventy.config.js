@@ -13,9 +13,9 @@ module.exports = (config) => {
   config.addTransform('minifyHtml', require('./lib/transforms/minifyHtml'));
 
   config.addCollection('posts', require('./lib/collections/posts'));
-  config.addCollection('tagList', require('./lib/collections/tagList'));
+  config.addCollection('genreList', require('./lib/collections/genreList'));
   config.addCollection('pagedPosts', require('./lib/collections/pagedPosts'));
-  config.addCollection('pagedPostsByTag', require('./lib/collections/pagedPostsByTag'));
+  config.addCollection('pagedPostsByGenre', require('./lib/collections/pagedPostsByGenre'));
 
   return {
     dir: {

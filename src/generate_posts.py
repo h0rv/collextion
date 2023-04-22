@@ -57,12 +57,12 @@ def write_yaml_block(file, podcast):
     # file.write(date)
 
     # TODO
-    # tags = 'tags: '
-    # file.write(tags)
-    # for tag in tag_list:
+    # genre = 'genres: '
+    # file.write(genres)
+    # for genre in genre_list:
     #     prefix = "   - "
-    #     tag = prefix + '\'' + tag + '\''
-    #     file.write(tag)
+    #     genre = prefix + '\'' + tgenreg + '\''
+    #     file.write(genre)
 
     file.write(block)
 
