@@ -25,7 +25,7 @@ module.exports = (coll) => {
     }, [])
     .map((genre) => ([
       genre,
-      coll.getFilteredByGenre(genre).length
+      coll.getFilteredByTag(genre).length
     ]))
     .sort((a, b) => b[1] - a[1]);
     

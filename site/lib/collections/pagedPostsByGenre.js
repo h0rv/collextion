@@ -7,7 +7,7 @@ module.exports = (coll) => {
   const pagedPosts = [];
 
   Object.keys(genreList).forEach((genreName) => {
-    const taggedPosts = [...coll.getFilteredByGenre(genreName)].reverse();
+    const taggedPosts = [...coll.getFilteredByTag(genreName)].reverse();
     const numberOfPages = Math.ceil(taggedPosts.length / maxPostsPerPage);
 
     for (let pageNum = 1; pageNum <= numberOfPages; pageNum++) {
