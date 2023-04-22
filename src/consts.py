@@ -32,3 +32,4 @@ TRANSCRIPT_NAME_SUFFIX = ".txt"
 POSTS_OUTPUT_PATH = path.join(cwd, "..", "site", "src", "posts")
 POST_NAME_PREFIX = "ep_"
 POST_NAME_SUFFIX = ".md"
+MOST_RECOMMENDED_PATH = "most_recommended_books.json"
