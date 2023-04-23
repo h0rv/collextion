@@ -15,6 +15,7 @@ module.exports = (config) => {
 
 	config.addCollection('posts', require('./lib/collections/posts'));
 	config.addCollection('genres', require('./lib/collections/genres'));
+	config.addCollection('pagedPosts', require('./lib/collections/pagedPosts'));
 	config.addCollection('mostRecs', require('./lib/collections/mostRecs'));
 
 

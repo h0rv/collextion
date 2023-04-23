@@ -40,9 +40,20 @@ def extract_books(transcript: str) -> [dict]:
                     book_dict['isbn'] = book['volumeInfo'].get(
                         'industryIdentifiers', [{'identifier': ''}])[0]['identifier']
                     book_dict['image_url'] = book['volumeInfo'].get(
-                        'imageLinks', {}).get('thumbnail').replace("http://", "https://")
+                        'imageLinks', {}).get('thumbnail')
                     book_dict['link'] = book['volumeInfo'].get(
                         'canonicalVolumeLink', '').replace("http://", "https://")
+
+                    # Convert links to https
+                    img_url = book_dict['image_url']
+                    if img_url != '' and img_url is not None:
+                        book_dict['image_url'] = img_url.replace(
+                            "http://", "https://")
+                    book_url = book_dict['link']
+                    if book_url != '' and book_url is not None:
+                        book_dict['link'] = book_url.replace(
+                            "http://", "https://")
+
                     books.append(book_dict)
                     titles_seen.add(book_dict['title'])
     return books
