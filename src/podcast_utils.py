@@ -186,29 +186,33 @@ def extract_podcast_info(entry) -> dict:
     return info
 
 
-def main():
-    entries = get_podcast_entries()
-
-    to_filter = podcast_entries_to_filter(entries)
-
-    info_map = dict()
-    for entry in entries:
-        info = extract_podcast_info(entry)
-        id = info['id']
-        if id in to_filter:
-            # Skip podcast
-            continue
-
-        info_map[id] = info
-
+def save_podcasts(podcasts: dict, filtered_ids=[]):
     if not path.exists(OUTPUT_PATH):
         makedirs(OUTPUT_PATH)
 
     with open(PODCASTS_OUTPUT_PATH, 'w') as f:
         json.dump({
-            "podcasts": info_map,
-            "filtered_ids": to_filter,
+            "podcasts": podcasts,
+            "filtered_ids": filtered_ids,
         }, f)
+
+
+def main():
+    entries = get_podcast_entries()
+
+    filtered_ids = podcast_entries_to_filter(entries)
+
+    info_map = dict()
+    for entry in entries:
+        info = extract_podcast_info(entry)
+        id = info['id']
+        if id in filtered_ids:
+            # Skip podcast
+            continue
+
+        info_map[id] = info
+
+    save_podcasts(info_map, filtered_ids)
 
 
 if __name__ == "__main__":

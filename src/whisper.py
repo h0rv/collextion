@@ -3,19 +3,21 @@ from os import path
 from pydub import AudioSegment
 
 
-def call_whisper_api(path: str):
+def call_whisper_api(mp3_path: str) -> str:
     """
     Whisper Docs: https://platform.openai.com/docs/guides/speech-to-text
     """
-    with open(path, "rb") as audio_file:
+    with open(mp3_path, "rb") as audio_file:
         # TODO: Potentially prompt it with podcast description
         transcript = Audio.transcribe("whisper-1", audio_file)
 
+    return transcript["text"]
 
-def split_podcast_mp3(path: str):
-    podcast_audio = AudioSegment.from_mp3(path)
 
-    fname = path[:path.rfind(".mp3")]  # remove file ext
+def split_podcast_mp3(mp3_path: str):
+    podcast_audio = AudioSegment.from_mp3(mp3_path)
+
+    fname = mp3_path[:mp3_path.rfind(".mp3")]  # remove file ext
 
     # PyDub handles time in milliseconds
     ten_minutes = 10 * 60 * 1000
