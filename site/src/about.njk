@@ -3,7 +3,19 @@ layout: default
 title: About The Group
 ---
 
-<div class="flex flex-col items-center text-lg">
+<div class="flex flex-col items-center justify-center text-2xl mt-20">
+
+	<p class="text-center text-4xl mt-10">
+		A website to display books recommended on <br> the
+		<a href="https://lexfridman.com/podcast/" class="inline-block text-blue-600 visited:text-purple-600">
+		Lex Fridman Podcast
+		</a>
+		using the power of AI.
+	</p>
+
+	<p class="mt-10">
+	Final project for CS 1699 Practical AI, Spring 2023. Created by:
+	</p>
     {% if author.avatar %}
     <a href="{{ author.homepage | url }}" target="_blank" rel="noopener">
         <img class="w-32 h-32 md:w-40 md:h-40 rounded-full" src="{{ author.avatar | url }}" width="128" height="128" alt="Author avatar">

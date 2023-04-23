@@ -155,7 +155,7 @@ def main():
         write_book_recommendations(file, recommendations)
 
         # Add podcast to processed list
-        processed_podcast_ids += id
+        processed_podcast_ids += [id]
 
         file.close()
 

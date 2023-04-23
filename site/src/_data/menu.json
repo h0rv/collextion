@@ -4,10 +4,6 @@
 		"url": "/most_recs"
 	},
 	{
-		"label": "Genres",
-		"url": "/genres"
-	},
-	{
 		"label": "About",
 		"url": "/about"
 	},
