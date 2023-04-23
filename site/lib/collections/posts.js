@@ -5,7 +5,7 @@ module.exports = (coll) => {
 	posts.sort((a, b) => {
 		const aNum = parseInt(a.data.title.match(/#(\d+)/)[1]);
 		const bNum = parseInt(b.data.title.match(/#(\d+)/)[1]);
-		return aNum - bNum;
+		return bNum - aNum;
 	});
 
 	return posts;
