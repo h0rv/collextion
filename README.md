@@ -1,5 +1,7 @@
 # collextion
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4dbcbba8-8935-490e-8850-b228547bfc97/deploy-status)](https://app.netlify.com/sites/collextion/deploys)
+
 A website to display book recommendations from the [Lex Fridman Podcast](https://lexfridman.com/podcast/).
 
 Final project for CS 1699 Practical AI, Spring 2023.
