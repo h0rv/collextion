@@ -58,8 +58,7 @@ def extract_book_info(book: dict) -> dict:
     """
     book_info = {}
     book_info['book_title'] = book['title']
-    book_info['book_author'] = book.get('authors', [''])[
-        0]  # if no author, blank
+    book_info['book_author'] = book.get('authors', [''])[0]  # if no author, blank
     book_info['book_cover'] = book['image_url']
     book_info['ISBN'] = book['isbn'] if 'isbn' in book else ''
     book_info['url'] = book['link'] if 'link' in book else ''

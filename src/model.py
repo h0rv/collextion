@@ -40,9 +40,9 @@ def extract_books(transcript: str) -> [dict]:
                     book_dict['isbn'] = book['volumeInfo'].get(
                         'industryIdentifiers', [{'identifier': ''}])[0]['identifier']
                     book_dict['image_url'] = book['volumeInfo'].get(
-                        'imageLinks', {}).get('thumbnail')
+                        'imageLinks', {}).get('thumbnail').replace("http://", "https://")
                     book_dict['link'] = book['volumeInfo'].get(
-                        'canonicalVolumeLink', '')
+                        'canonicalVolumeLink', '').replace("http://", "https://")
                     books.append(book_dict)
                     titles_seen.add(book_dict['title'])
     return books
